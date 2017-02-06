@@ -80,7 +80,7 @@ public:
 void dumpy_func()
 {
 	while (true)
-		cpu::interrupt_enable_suspend;
+		cpu::interrupt_enable_suspend();
 }
 
 ucontext_t *dumpy_thread = new ucontext_t;
@@ -90,6 +90,7 @@ dumpy_thread->uc_stack.ss_sp = malloc(STACK_SIZE);
 dumpy_thread->uc_stack.ss_size = STACK_SIZE;
 dumpy_thread->uc_stack.ss_flags = 0;
 makecontext(dumpy_thread, (void(*)()) dumpy_func, 0);
+
 
 void Interrupt_yield();
 void delete_finish_job();
